@@ -1,0 +1,19 @@
+% compile
+
+c(inc_server).
+c(inc_client).
+
+
+% server up
+
+Pid = inc_server:start().
+
+% client connect
+
+inc_client:rpc(Pid, {test}).
+
+
+A = 10.
+B = inc_client:rpc(Pid, {inc, A}).
+C = inc_client:rpc(Pid, {dec, B}).
+D = inc_client:rpc(Pid, {inc, C}).
